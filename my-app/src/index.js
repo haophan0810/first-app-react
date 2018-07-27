@@ -1,19 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+
 class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: this.props.value,
+      check: true
+
+    };
+  }
+
+  turnPlay(){
+  console.log('this :', this);
+    this.setState({
+      check:false
+    })
+    console.log('this.state.turn :', this.state.check);
+    if(this.state.check){
+      
+      this.setState({
+        value:'X',
+        check:false
+
+      });
+     
+      console.log('this.state.turn :', this.state.check);
+    }else{
+      this.setState({
+        value:'O',
+        check : true,
+
+      })
+      console.log('object');
+    }
+  }
+
     render() {
       return (
-        <button className="square">
+        <button className="square" onClick={this.turnPlay.bind(this)} >
+          {console.log('this.props.value :', this.state.value)}
+          { this.state.value }
           {/* TODO */}
         </button>
       );
     }
   }
   
+ 
+
   class Board extends React.Component {
     renderSquare(i) {
-      return <Square />;
+      return <Square value={i} />;
     }
   
     render() {
@@ -46,6 +85,7 @@ class Square extends React.Component {
     render() {
       return (
         <div className="game">
+        
           <div className="game-board">
             <Board />
           </div>
